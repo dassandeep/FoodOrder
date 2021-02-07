@@ -26,7 +26,7 @@ namespace ConsumerConsoleApp
             {
                 GroupId = "test-consumer-group",
                 BootstrapServers = "localhost:9092",
-                AutoOffsetReset = AutoOffsetReset.Earliest
+                AutoOffsetReset = AutoOffsetReset.Latest
             };
 
             using (var c = new ConsumerBuilder<Ignore, string>(conf).Build())
