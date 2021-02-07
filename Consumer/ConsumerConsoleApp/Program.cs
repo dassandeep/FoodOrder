@@ -1,14 +1,25 @@
 ﻿using Confluent.Kafka;
+using Kafka.Public;
+using Kafka.Public.Loggers;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Text;
 using System.Threading;
 
 namespace ConsumerConsoleApp
 {
     class Program
     {
+        //private ClusterClient _cluster;
+        public Program()
+        {
+         
+            //_cluster = new ClusterClient(new Configuration
+            //{ Seeds = "localhost:9092" }, new ConsoleLogger());
+        }
+
         public static async System.Threading.Tasks.Task Main(string[] args)
         {
             var conf = new ConsumerConfig
@@ -23,8 +34,9 @@ namespace ConsumerConsoleApp
                 c.Subscribe("sandeepFood");
 
                 CancellationTokenSource cts = new CancellationTokenSource();
-                Console.CancelKeyPress += (_, e) => {
-                    e.Cancel = true; 
+                Console.CancelKeyPress += (_, e) =>
+                {
+                    e.Cancel = true;
                     cts.Cancel();
                 };
 
@@ -40,7 +52,7 @@ namespace ConsumerConsoleApp
                             obj = JsonConvert.DeserializeObject<Location>(receivedMessage);
                             using (var client = new HttpClient())
                             {
-                                client.BaseAddress = new Uri("http://localhost:55863");
+                                client.BaseAddress = new Uri("http://localhost:44387");
                                 var content = new FormUrlEncodedContent(new[]
                                 {
                                     new KeyValuePair<string, string>("lat", obj.lat),
@@ -60,10 +72,12 @@ namespace ConsumerConsoleApp
                 }
                 catch (OperationCanceledException)
                 {
-                   
+
                     c.Close();
                 }
             }
         }
+
+
     }
 }
