@@ -18,14 +18,6 @@ namespace MenuPublisher
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-
-
-      //      var builder = new ConfigurationBuilder()
-      //.SetBasePath(evm.ContentRootPath)
-      //.AddJsonFile("appsettings.json", true, true)
-      //.AddJsonFile($"appsettings.{evm.EnvironmentName}.json", true)
-      //.AddEnvironmentVariables();
-      //      Configuration = builder.Build(); //read the appsetting.json file
             AppSettings.Instance.SetConfiguration(Configuration);
         }
 
