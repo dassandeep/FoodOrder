@@ -1,0 +1,27 @@
+{
+  "subject": "aa-value",
+  "version": 3,
+  "id": 1395,
+  "schema": {
+    "type": "record",
+    "name": "aa",
+    "namespace": "il.aa",
+    "fields": [
+
+    
+      {
+        "name": "ItemName",
+        "type": "string"
+      },
+      {
+        "name": "ItemPrice",
+        "type": "string"
+      },
+      {
+        "name": "HotelName",
+        "type": "string"
+      }
+
+    ]
+  }
+}
