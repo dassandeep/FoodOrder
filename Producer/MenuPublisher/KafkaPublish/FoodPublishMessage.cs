@@ -13,24 +13,11 @@
     {
         private IAppSettings _configuration;
         public FoodPublishMessage(IAppSettings appSettings)=>this._configuration = appSettings;
-
-        public async Task PublishMessage(Food food)
-        {
-            Dictionary<string, object> keyValuePairs = _configuration.GetConfigValue();
-            if (!string.IsNullOrWhiteSpace(GetSchemaAvro(out string schema)))
-            {
-                if (keyValuePairs != null)
-                {
-                    //CreateProducer(keyValuePairs, food, schema);
-
-                    await Task.Run(() =>
-                    {
-                        CreateProducer(keyValuePairs, food,schema);
-                    });
-                }
-            }
-
-        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="schema"></param>
+        /// <returns></returns>
         static string GetSchemaAvro(out string schema)
         {
             string summaryQuery = string.Empty;
@@ -42,6 +29,12 @@
             }
             return schema;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="configValuePairs"></param>
+        /// <param name="food"></param>
+        /// <param name="schema"></param>
         static void CreateProducer(Dictionary<string, object> configValuePairs, Food food, string schema)
         {
             try
@@ -66,6 +59,11 @@
 
 
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="food"></param>
+        /// <returns></returns>
 
         public  async Task WriteMessage(Food food)
         {
